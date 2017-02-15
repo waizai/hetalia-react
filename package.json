@@ -11,22 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/panjizhi/lghetalia.git"
+    "url": "https://github.com/waizai/hetalia-react.git"
   },
   "keywords": [
     "font-end",
     "fis3"
   ],
   "author": {
-    "name": "panjizhi",
-    "email": "panjizhi1987@gmail.com",
-    "url": "https://github.com/panjizhi"
+    "name": "waizai",
+    "email": "dangxl@yeah.net",
+    "url": "https://github.com/waizai"
   },
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/panjizhi/lghetalia/issues"
+    "url": "https://github.com/waizai/hetalia-react/issues"
   },
-  "homepage": "https://github.com/panjizhi/lghetalia",
+  "homepage": "https://github.com/waizai/hetalia-react",
   "dependencies": {
     "fis-optimizer-html-minifier": "0.0.9",
     "fis-parser-less": "0.1.3",

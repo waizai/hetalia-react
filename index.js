@@ -32,6 +32,7 @@ fis.match('*.html', {
         }
         content = processMedias(content);
         content = processExtend(content);
+        content = reactAnnotation (content);
         return content;
 
         /**
@@ -44,6 +45,25 @@ fis.match('*.html', {
          * ##{block name="title"}
          * ##{/block}
          */
+        function reactAnnotation (content) {
+            var globalReg = /<!--\s*fis-([^-]+)-start\s*-->(.|[\r\n\t])*?<!--\s*fis-([^-]+)-end\s*-->/ig;
+            var reg = /<!--\s*fis-([^-]+)-start\s*-->(.|[\r\n\t])*?<!--\s*fis-([^-]+)-end\s*-->/i;
+            var arr = content.match(globalReg);
+            if (arr !== null) {
+                arr.forEach(function (code) {
+                    var mediaInfo = code.match(reg);
+                    if (mediaInfo[1] === mediaInfo[3]) {
+                        var medias = mediaInfo[1].split('|');
+                        var media = fis.project.currentMedia();
+                        if (medias.indexOf(media) === -1) {
+                            content = content.replace(code, '');
+                        }
+                    }
+                });
+            }
+            return content;
+        }
+
         function processExtend (tplContent) { // 模板继承语法糖
             var extendsMatch = tplContent.match(/##\{extends\s+file\s*=\s*["']([^'"]+)["']\s*\}/);
             if (!extendsMatch) {
@@ -110,11 +130,42 @@ fis.match('*.less', {
     rExt: '.css'
 });
 
+fis.match('*.less',{
+    postprocessor : fis.plugin("autoprefixer",{
+        "browsers": ['Firefox >= 20', 'Safari >= 6', 'Explorer >= 9', 'Chrome >= 12', "ChromeAndroid >= 4.0","Android >= 2.1", "iOS >= 4"],
+        "flexboxfixer": true,
+        "gradientfixer": true
+    })
+})
+
+// 让 modules 目录下面的 js 和 jsx 通过 typescript
+fis.match('{/{components,widgets,page,modules}/**.js,*.jsx}', {
+    // 要支持 es6 和 jsx， typescript 也能胜任，最主要是编译速度要快很多。
+    // parser: fis.plugin('typescript'),
+
+    // typescript 就是编译速度会很快，但是对一些 es7 的语法不支持，如果你觉得不爽，可以用 babel 来解决。用以下内容换掉 typescript 的parser配置就好了。
+    parser: fis.plugin('babel-5.x', {
+        sourceMaps: true,
+        optional: ["es7.decorators", "es7.classProperties"]
+    }),
+    rExt: '.js'
+});
+
+fis.unhook('components');
+fis.hook('node_modules', {
+    ignoreDevDependencies: true // 忽略 devDep 文件
+})
+
 // widgets, modules, components和page文件夹下的js文件被认为是模块
 // 编译时可以自动包裹factory函数：define(function(require, exports, module) {})
-fis.match('**/{widgets,modules,components,page}/**.js', {
+fis.match('**/{node_modules,widgets,modules,components,page}/**.js', {
     isMod: true
 });
+
+// 设置成是模块化 js
+// fis.match('/{node_modules,**/components,**/page,**/modules,**/widgets}/**.{js,jsx}', {
+//     isMod: true
+// });
 
 // 本地开发期间，velocity模版需要结合mock文件被编译成html文件，需要fis-postprocessor-velocity插件。
 // fis-postprocessor-velocity：https://github.com/vicerwang/fis-postprocessor-velocity
@@ -162,6 +213,17 @@ fis.match('fis-conf.js', {
     useCache: false,
     release: false
 });
+
+fis.media('prod').match('release.sh', {
+    release: false
+});
+// js jsx import css  img
+fis.match('*.{js,jsx}', {
+    preprocessor: [
+        fis.plugin('js-require-file'),
+        fis.plugin('js-require-css')
+    ]
+})
 
 // 本地调试时，需要将所有子系统下面的server.conf合并到根目录下的server.conf文件，最后发布到config文件夹下。
 fis.match('/server.conf', {
@@ -269,10 +331,10 @@ fis.media('prod').match('*.png', {
     optimizer: fis.plugin('png-compressor')
 });
 
-fis.media('prod').match('*.js', {
+fis.media('prod').match('/{node_modules,**/components,**/modules,**/static/js}/**.{js,jsx}', {
     optimizer: fis.plugin('uglify-js', {
         mangle: {
-            except: 'exports, module, require, define'
+            except: 'exports, module, require, define, import, export'
         }
     })
 });
