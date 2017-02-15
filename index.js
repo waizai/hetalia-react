@@ -151,14 +151,10 @@ fis.match('{/{components,widgets,page,modules}/**.js,*.jsx}', {
     rExt: '.js'
 });
 
-fis.unhook('components');
-fis.hook('node_modules', {
-    ignoreDevDependencies: true // 忽略 devDep 文件
-})
 
 // widgets, modules, components和page文件夹下的js文件被认为是模块
 // 编译时可以自动包裹factory函数：define(function(require, exports, module) {})
-fis.match('**/{node_modules,widgets,modules,components,page}/**.js', {
+fis.match('**/{widgets,modules,components,page}/**.js', {
     isMod: true
 });
 
@@ -331,7 +327,7 @@ fis.media('prod').match('*.png', {
     optimizer: fis.plugin('png-compressor')
 });
 
-fis.media('prod').match('/{node_modules,**/components,**/modules,**/static/js}/**.{js,jsx}', {
+fis.media('prod').match('/{**/components,**/modules,**/static/js}/**.{js,jsx}', {
     optimizer: fis.plugin('uglify-js', {
         mangle: {
             except: 'exports, module, require, define, import, export'
