@@ -1,8 +1,8 @@
 var path = require('path');
 var fs = require('fs');
 var fis = module.exports = require('fis3');
-fis.require.prefixes.unshift('hetalia');
-fis.cli.name = 'hetalia';
+fis.require.prefixes.unshift('lghetalia');
+fis.cli.name = 'lghetalia';
 fis.cli.info = require('./package.json');
 
 /******************** dev start ********************/

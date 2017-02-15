@@ -1,17 +1,17 @@
 {
-  "name": "hetalia",
+  "name": "lghetalia",
   "version": "1.2.0",
   "description": "front-end integrated solution (based on fis3)",
   "main": "index.js",
   "bin": {
-    "hetalia": "bin/hetalia.js"
+    "lghetalia": "bin/lghetalia.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/panjizhi/hetalia.git"
+    "url": "https://github.com/panjizhi/lghetalia.git"
   },
   "keywords": [
     "font-end",
@@ -24,9 +24,9 @@
   },
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/panjizhi/hetalia/issues"
+    "url": "https://github.com/panjizhi/lghetalia/issues"
   },
-  "homepage": "https://github.com/panjizhi/hetalia",
+  "homepage": "https://github.com/panjizhi/lghetalia",
   "dependencies": {
     "fis-optimizer-html-minifier": "0.0.9",
     "fis-parser-less": "0.1.3",
