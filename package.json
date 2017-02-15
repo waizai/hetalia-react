@@ -1,6 +1,6 @@
 {
   "name": "lghetalia",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "front-end integrated solution (based on fis3)",
   "main": "index.js",
   "bin": {
@@ -36,6 +36,13 @@
     "fis3-postpackager-loader": "1.3.2",
     "liftoff": "2.1.0",
     "minimist": "1.2.0",
-    "normae-lint-html": "0.0.1"
+    "normae-lint-html": "0.0.1",
+    "fis-parser-babel-5.x": "^1.4.0",
+    "fis-postprocessor-px2rem": "^1.0.4",
+    "fis3-hook-node_modules": "^2.2.7",
+    "fis3-packager-deps-pack": "^0.1.2",
+    "fis3-postprocessor-autoprefixer": "^1.0.0",
+    "fis3-preprocessor-js-require-css": "^0.1.0",
+    "fis3-preprocessor-js-require-file": "^0.1.0"
   }
 }
