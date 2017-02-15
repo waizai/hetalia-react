@@ -130,13 +130,13 @@ fis.match('*.less', {
     rExt: '.css'
 });
 
-fis.match('*.less',{
-    postprocessor : fis.plugin("autoprefixer",{
-        "browsers": ['Firefox >= 20', 'Safari >= 6', 'Explorer >= 9', 'Chrome >= 12', "ChromeAndroid >= 4.0","Android >= 2.1", "iOS >= 4"],
-        "flexboxfixer": true,
-        "gradientfixer": true
-    })
-})
+// fis.match('*.less',{
+//     postprocessor : fis.plugin("autoprefixer",{
+//         "browsers": ['Firefox >= 20', 'Safari >= 6', 'Explorer >= 9', 'Chrome >= 12', "ChromeAndroid >= 4.0","Android >= 2.1", "iOS >= 4"],
+//         "flexboxfixer": true,
+//         "gradientfixer": true
+//     })
+// })
 // 让 modules 目录下面的 js 和 jsx 通过 typescript
 fis.match('{/{components,widgets,page,modules}/**.js,*.jsx}', {
     // 要支持 es6 和 jsx， typescript 也能胜任，最主要是编译速度要快很多。
