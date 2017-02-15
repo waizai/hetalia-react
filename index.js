@@ -134,13 +134,13 @@ fis.match('*.less', {
 // 让 modules 目录下面的 js 和 jsx 通过 typescript
 fis.match('{/{components,widgets,page,modules}/**.js,*.jsx}', {
     // 要支持 es6 和 jsx， typescript 也能胜任，最主要是编译速度要快很多。
-    // parser: fis.plugin('typescript'),
+    parser: fis.plugin('typescript'),
 
     // typescript 就是编译速度会很快，但是对一些 es7 的语法不支持，如果你觉得不爽，可以用 babel 来解决。用以下内容换掉 typescript 的parser配置就好了。
-    parser: fis.plugin('babel-5.x', {
-        sourceMaps: true,
-        optional: ["es7.decorators", "es7.classProperties"]
-    }),
+    // parser: fis.plugin('babel-5.x', {
+    //     sourceMaps: true,
+    //     optional: ["es7.decorators", "es7.classProperties"]
+    // }),
     rExt: '.js'
 });
 

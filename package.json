@@ -1,6 +1,6 @@
 {
   "name": "lghetalia",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "front-end integrated solution (based on fis3)",
   "main": "index.js",
   "bin": {
